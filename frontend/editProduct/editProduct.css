@@ -1,0 +1,114 @@
+/* .inputImgContainer img {
+    width: 26vw;
+    height: 38vw;
+    object-fit: cover;
+} */
+
+.labelinputImage{
+    width: 26vw;
+    height: 38vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    background-color: rgba(37, 37, 37, 0.9);
+    border: 2px dashed gray;
+    cursor: pointer;
+}
+.chosenImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.labelinputImage span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.labelinputImage:hover{
+    background-color: rgba(59, 59, 59, 0.9);
+}
+.labelinputImage:focus{
+    outline: 1px solid white;
+}
+.labelinputImage:hover span{
+    font-size: 26px;
+}
+.inputImage{
+    display: none;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+main form {
+    padding: 32px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+}
+
+.inputAnimeContainer {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.inputAnime {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.inputAnime input {
+    color: rgb(32, 32, 32);
+    font-size: 24px;
+    border-radius: 5px;
+    padding: 4px 8px;
+}
+
+.caixa-texto {
+    color: rgb(59, 59, 59);
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    min-height: 100px;
+    max-lines: 4;
+    max-height: 100px;
+    resize: vertical;
+    /* Permite redimensionar verticalmente */
+}
+
+.caixa-texto:focus, input:focus {
+    border-color: orange;
+    box-shadow: 2px 2px 12px rgba(255, 165, 0, 0.4);
+    outline: none;
+}
+
+.saveButtonContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.saveButtonContainer button {
+    color: black;
+    width: 252px;
+    height: 48px;
+}

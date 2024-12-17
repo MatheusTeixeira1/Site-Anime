@@ -1,0 +1,108 @@
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+
+header #brandLogoContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    /* Impede a seleção de texto */
+    pointer-events: auto;
+    /* Permite clicar no elemento */
+    cursor: pointer;
+}
+
+header #brandLogo {
+    width: 32px;
+    height: 32px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 50%;
+}
+
+header #containerOppenPopUpMenu {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 9;
+}
+
+header #containerOppenPopUpMenu img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    outline: 2px solid orange;
+}
+
+header #containerOppenPopUpMenu svg {
+    width: 24px;
+    height: 24px;
+    transition: .2s;
+}
+
+#popupMenu {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    z-index: 1000;
+    width: 256px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.2s, height 0.2s, padding 0.2s;
+}
+
+#popupMenu ul {
+    list-style-type: none;
+    color: #ccc;
+    user-select: none;
+    /* Impede a seleção de texto */
+    pointer-events: auto;
+    /* Permite clicar no elemento */
+    cursor: pointer;
+}
+
+#popupMenu ul li:last-child:hover {
+    background-color: rgb(255, 39, 39);
+    color: white;
+}
+
+#popupMenu li {
+    padding: 16px;
+    transition: .2s;
+}
+
+#popupMenu li:hover {
+    background-color: rgba(0, 0, 0, 1);
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 24px 16px;
+    transition: .2s;
+}
+
+#backgorundPopUpMenu {
+    z-index: -999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    overflow: hidden;
+}

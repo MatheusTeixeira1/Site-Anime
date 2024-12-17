@@ -1,0 +1,236 @@
+main{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.sessionCards p{
+    padding: 6px 0 8px 0;
+}
+.cardsHorizontalScrol {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background-color: rgba(34, 34, 34, 0.9);
+    border-radius: 8px;
+    justify-content: flex-start;
+    /* Alinha os itens no início */
+    align-items: center;
+    position: relative;
+    overflow-x: scroll;
+    width: 80vw;
+    scroll-behavior: smooth;
+}
+
+
+/* user-select: none;
+pointer-events: auto;
+cursor: pointer; */
+.card {
+    user-select: none;
+    pointer-events: auto;
+    cursor: pointer;
+    min-width: 15vw;
+    min-height: 28vw;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #333;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.frontPart,
+.backPart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.frontPart {
+    height: 100%;
+    z-index: 1;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.frontPart img {
+    width: 15vw;
+    height: 22vw;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.backPart {
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transform: scale(1.1);
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.backPart .backPart .svgContainers {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+}
+
+.card:hover .backPart {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cardsHorizontalScrol::-webkit-scrollbar {
+    height: 8px;
+    background-color: #333;
+}
+
+.cardsHorizontalScrol::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+
+
+
+
+#formSearchBlueray {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    flex-direction: column;
+    margin:  64px 0;
+}
+#formSearchBlueray div{
+    display: flex;
+}
+#formSearchBlueray h2{
+    width: 100%;
+}
+#formSearchBlueray input {
+    color: #bbb;
+    width: 40vw;
+    height: 4vw;
+    padding: 1vw;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    border: none;
+    font-size: 40px;
+    transition: .2s;
+    border-bottom: 1px solid #ccc;
+}
+
+#formSearchBlueray input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: .2s;
+}
+
+#formSearchBlueray button {
+    width: 10vw;
+    height: 4vw;
+    border: 1px solid #ccc;
+    color: rgb(78, 78, 78);
+    font-size: 16px;
+}
+
+#formSearchBlueray button:hover {
+    background-color: orange;
+    border: 1px solid orange;
+    color: black;
+}
+
+.cardsVerticalScrol{
+    border-radius: 8px;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 100%;
+    min-width: 0;
+}
+#sessionCardsSearch{
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+/* ↓↓↓↓↓ estilo do card alternativo: ↓↓↓↓↓ */
+
+/* .cardsHorizontalScrol {
+    width: 80vw;
+    display: flex;
+    gap: 20px;
+    margin-top: 100px;
+    perspective: 1000px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.cardsHorizontalScrol::-webkit-scrollbar {
+    height: 8px; 
+    background-color: #222; 
+}
+
+.cardsHorizontalScrol::-webkit-scrollbar-thumb {
+    background-color: #555; 
+    border-radius: 4px;
+}
+
+.card {
+    flex-shrink: 0;
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d; 
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: rotateY(180deg); 
+}
+
+.frontPart,
+.backPart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+.frontPart {
+    background-color: #333;
+    color: white;
+}
+
+.backPart {
+    background-color: #444;
+    color: white;
+    transform: rotateY(180deg); 
+} */
+
+
+/* ↑↑↑↑↑ fim do estilo alternativo ↑↑↑↑↑ */

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../public/images/animeray-logo.jpg">
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="../public/styles/all.css">
+    <link rel="stylesheet" href="../public/styles/footer.css">
+    <link rel="stylesheet" href="../public/styles/header.css">
+</head>
+
+<body id="body">
+    <video class="background-video" autoplay loop muted>
+        <source src="../public/videos/Background.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+
+    <div id="popupMenu">
+        <ul>
+            <li class="profileButton">Meu perfil</li>
+            <li class="favoritesButton">Lista de Favoritos</li>
+            <li class="adminButton">Area do Adm</li>
+            
+            <li class="logoutButton">Sair</li>
+        </ul>
+    </div>
+    <div id="backgorundPopUpMenu">
+    </div>
+
+    <header>
+        <a id="brandLogoContainer" href="#">
+            <img id="brandLogo" src="../public/images/animeray-logo.jpg" alt="">
+            <h2>ANIMERAY</h2>
+        </a>
+        <div id="containerOppenPopUpMenu">
+            <img class="profileImage" id="profileImage" src="../public/images/perfil-padrao.png" alt="">
+            <svg id="svgArrow" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ccc" transform="rotate(180 8 8)"
+                    d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#000000" />
+            </svg>
+        </div>
+    </header>
+    <main>
+        <div class="sessionCards">
+            <h2>Saindo do forno 🥧</h2>
+            <p>Confira os animes e filmes que acabaram de entrar para nosso catalogo.</p>
+            <!-- era id="cards" -->
+            <div class="cardsHorizontalScrol" id="cardsNewAnimes">
+
+            </div>
+
+        </div>
+        <form id="formSearchBlueray" action="">
+            <h2>Procurando algo em especifico?</h2>
+            <div>
+                <input id="inputSearchBlueray" placeholder="Nome do anime aqui..." type="text">
+                <button>PESQUISAR</button>
+            </div>
+        </form>
+        <div id="sessionCardsSearch" class="sessionCards">
+
+            <!-- era id="cards" -->
+            <div id="cardsSearchResult" class="cardsVerticalScrol">
+
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-sections">
+
+
+                <div class="footer-section navigation">
+                    <div>
+                        <h3>Guia de Navegação</h3>
+                        <ul>
+                            <li class="backToTop">Voltar para Topo</li>
+
+                            <li class="adminButton">Area do Adm</li>
+                            <li class="logoutButton">Trocar de Conta</li>
+                            <li class="logoutButton">Sair</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Área do Perfil</h3>
+                        <ul>
+                            <li class="profileButton">Meu Perfil</li>
+                            <li class="favoritesButton">Lista de Favoritos</li>
+                            <li class="favoritesButton">Deletar Minha Conta</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Contate-me</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/MatheusTeixeira1" target="_blank">
+                                    Github 🔗😺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/matheusteixeirap/" target="_blank">
+                                    Linkedin 🔗💼
+                                </a>
+                            </li>
+                            <li>
+                                <span>mathesteix@gmail.com</span>
+                                <a href="mailto:mathesteix@gmail.com">→🔗📧</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <p>Criador: <strong>Matheus Teixeira</strong></p>
+                <p>Site: <strong>ANIMERAY</strong></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../public/scripts/navigation.js"></script>
+    <script src="../public/scripts/auth.js"></script>
+    <script src="../public/scripts/api.js"></script>
+    <script src="../public/scripts/dynamicComponents.js"></script>
+    <script src="products.js"></script>
+    <script>
+
+        
+    </script>
+</body>
+
+</html>

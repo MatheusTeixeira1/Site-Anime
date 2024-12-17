@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+main {
+    align-items: center;
+    justify-content: center;
+}
+
+main .infoProfileMainConatiner {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    flex-direction: column;
+    width: 50vw;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+.profilePictureContainer {
+    position: relative;
+    background-color: aqua;
+    width: 100%;
+    height: 160px;
+    background-image: url('../public/images/perfil.jpg');
+    background-size: cover;
+    /* Ajusta a imagem para cobrir toda a div */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-repeat: no-repeat;
+
+    margin-bottom: 96px;
+}
+
+.labelinputImage {
+    width: 128px;
+    height: 128px;
+    background-color: blue;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+}
+
+.inputImage {
+    display: none;
+}
+
+.chosenImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.infoProfileBody{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 32px;
+}
+
+.infoProfileContainer{
+    background-color: rgb(37, 37, 37);
+    width: 80%;
+    border-radius: 8px;
+}
+.infoProfile{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+}
+.infoProfile a{
+    display: flex;
+    align-items: center;
+    background-color: azure;
+    align-items: center;
+    justify-content: center;
+    width: 128px;
+    color: black;
+    border-radius: 16px;
+    outline: none;
+    border: none;
+}
+.infoProfile a:hover{
+    background-color: rgb(84, 255, 84);
+    color: white;
+}

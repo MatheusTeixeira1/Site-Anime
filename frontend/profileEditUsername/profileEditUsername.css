@@ -1,0 +1,90 @@
+main {
+    align-items: center;
+    justify-content: center;
+}
+
+main form {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    flex-direction: column;
+    width: 50vw;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+form .labelinputImageContainer {
+    position: relative;
+    background-color: aqua;
+    width: 100%;
+    height: 160px;
+    background-image: url('../public/images/perfil.jpg');
+    background-size: cover;
+    /* Ajusta a imagem para cobrir toda a div */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-repeat: no-repeat;
+}
+
+.labelinputImage {
+    width: 128px;
+    height: 128px;
+    background-color: blue;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+}
+
+.inputImage {
+    display: none;
+}
+
+.inputProfileContainer {
+    margin: 96px 0 32px 0;
+}
+
+.inputProfile {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputProfile input {
+    padding: 0 4px;
+    border-radius: 2px;
+    height: 24px;
+    color: black;
+    outline: none;
+    border: none;
+}
+.inputProfile input:hover{
+    outline: 2px solid orange;
+}
+.inputProfile input:focus{
+    outline: 2px solid orange;
+}
+.buttonsContainer {
+    margin: 0 0 32px 0;
+}
+
+.buttonsContainer button {
+    width: 128px;
+    height: 32px;
+    color: black;
+    border: none;
+}
+.buttonsContainer button:last-child:hover {
+    background-color: rgb(255, 53, 53);
+    color: white;
+}
+.buttonsContainer button:first-child:hover {
+    background-color: rgb(0, 199, 0);
+    color: white;
+}
+.chosenImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+}

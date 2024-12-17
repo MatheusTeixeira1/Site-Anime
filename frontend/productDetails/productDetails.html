@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../public/images/animeray-logo.jpg">
+    <link rel="stylesheet" href="productDetails.css">
+    <link rel="stylesheet" href="../public/styles/all.css">
+    <link rel="stylesheet" href="../public/styles/footer.css">
+    <link rel="stylesheet" href="../public/styles/header.css">
+</head>
+
+<body id="body">
+    <video class="background-video" autoplay loop muted>
+        <source src="../public/videos/Background2.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+
+    <div id="popupMenu">
+        <ul>
+            <li class="profileButton">Meu perfil</li>
+            <li class="favoritesButton">Lista de Favoritos</li>
+            <li class="adminButton">Area do Adm</li>
+            <li class="logoutButton">Sair</li>
+        </ul>
+    </div>
+    <div id="backgorundPopUpMenu">
+    </div>
+
+    <header>
+        <a id="brandLogoContainer" href="../products/products.html">
+            <img id="brandLogo" src="../public/images/animeray-logo.jpg" alt="">
+            <h2>ANIMERAY</h2>
+        </a>
+        <div id="containerOppenPopUpMenu">
+            <img id="profileImage" alt="">
+            <svg id="svgArrow" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ccc" transform="rotate(180 8 8)"
+                    d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#000000" />
+            </svg>
+        </div>
+    </header>
+    
+    <main>
+        <div class="detailsImgContainer">
+            <img id="imgProduct" src="" alt="">
+        </div>
+        <div class="detailsInfoContainer">
+            <div>
+                <h1 id="name"></h1>
+                <h2>R$: <span id="price"></span></h2>
+                <h3>Temporada: <span id="season"></span></h3>
+                <p id="description"></p>
+            </div>
+            <div class="detailsBuyButtonContainer">
+                <button> Comprar </button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32px" height="32px">
+                    <polygon
+                        points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+                        fill="#000000" stroke="#ffa500" stroke-width="1.5" />
+                </svg>
+            </div>
+    </main>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-sections">
+
+
+                <div class="footer-section navigation">
+                    <div>
+                        <h3>Guia de Navegação</h3>
+                        <ul>
+                            <li class="backToTop">Voltar para Topo</li>
+
+                            <li class="adminButton">Area do Adm</li>
+                            <li class="logoutButton">Trocar de Conta</li>
+                            <li class="logoutButton">Sair</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Área do Perfil</h3>
+                        <ul>
+                            <li class="profileButton">Meu Perfil</li>
+                            <li class="favoritesButton">Lista de Favoritos</li>
+                            <li class="favoritesButton">Deletar Minha Conta</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Contate-me</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/MatheusTeixeira1" target="_blank">
+                                    Github 🔗😺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/matheusteixeirap/" target="_blank">
+                                    Linkedin 🔗💼
+                                </a>
+                            </li>
+                            <li>
+                                <span>mathesteix@gmail.com</span>
+                                <a href="mailto:mathesteix@gmail.com">→🔗📧</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <p>Criador: <strong>Matheus Teixeira</strong></p>
+                <p>Site: <strong>ANIMERAY</strong></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+    </script>
+
+    <script src="../public/scripts/navigation.js"></script>
+    <script src="../public/scripts/dynamicComponents.js"></script>
+    <script src="productDetails.js"></script>
+</body>
+
+</html>

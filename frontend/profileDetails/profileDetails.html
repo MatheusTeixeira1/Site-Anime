@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../public/images/animeray-logo.jpg">
+    <link rel="stylesheet" href="profileDetails.css">
+    <link rel="stylesheet" href="../public/styles/all.css">
+    <link rel="stylesheet" href="../public/styles/footer.css">
+    <link rel="stylesheet" href="../public/styles/header.css">
+</head>
+
+<body id="body">
+    <video class="background-video" autoplay loop muted>
+        <source src="../public/videos/Background.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+
+    <div id="popupMenu">
+        <ul>
+            <li class="profileButton">Meu perfil</li>
+            <li class="favoritesButton">Lista de Favoritos</li>
+            <li class="adminButton">Area do Adm</li>
+            <li class="logoutButton">Sair</li>
+        </ul>
+    </div>
+    <div id="backgorundPopUpMenu">
+    </div>
+
+    <header>
+        <a id="brandLogoContainer" href="#">
+            <img id="brandLogo" src="../public/images/animeray-logo.jpg" alt="">
+            <h2>ANIMERAY</h2>
+        </a>
+        <div id="containerOppenPopUpMenu">
+            <img class="profileImage" id="profileImage" src="../public/images/perfil-padrao.png" alt="">
+            <svg id="svgArrow" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ccc" transform="rotate(180 8 8)"
+                    d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#000000" />
+            </svg>
+        </div>
+    </header>
+    <main>
+        <div class="infoProfileMainConatiner" id="formEditUser">
+            <!-- era labelinputImageContainer -->
+            <div class="profilePictureContainer">
+                <label for="inputImage" class="labelinputImage">
+                    <span class="spanInputImage">
+                        <img class="chosenImage profileImage" src="" alt="">
+                    </span>
+                    <input id="inputImage" class="inputImage" type="file" accept="image/*">
+                </label>
+            </div>
+
+            <div class="infoProfileBody">
+                <div class="infoProfileContainer">
+                    <div class="infoProfile">
+                        <div>
+                            <label for="username">Username:</label>
+                            <p id="username">Teste de Sousa</p>
+                        </div>
+                        <a href="../profileEditUsername/profileEditUsername.html">
+                            Editar
+                        </a>
+                    </div>
+                    <div class="infoProfile">
+                        <div>
+                            <label for="email">Email:</label>
+                            <p id="email">Teste@gmail.com</p>
+                        </div>
+                        <a href="../profileEditEmail/profileEditEmail.html">
+                            Editar
+                        </a>
+                    </div>
+                    <div class="infoProfile">
+                        <div>
+                            <label for="password">Senha:</label>
+                            <p id="password"> ********* </p>
+                        </div>
+                        <a href="../profileEditPassword/profileEditPassword.html">
+                            Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-sections">
+
+
+                <div class="footer-section navigation">
+                    <div>
+                        <h3>Guia de Navegação</h3>
+                        <ul>
+                            <li class="backToTop">Voltar para Topo</li>
+
+                            <li class="adminButton">Area do Adm</li>
+                            <li class="logoutButton">Trocar de Conta</li>
+                            <li class="logoutButton">Sair</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Área do Perfil</h3>
+                        <ul>
+                            <li class="profileButton">Meu Perfil</li>
+                            <li class="favoritesButton">Lista de Favoritos</li>
+                            <li class="favoritesButton">Deletar Minha Conta</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Contate-me</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/MatheusTeixeira1" target="_blank">
+                                    Github 🔗😺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/matheusteixeirap/" target="_blank">
+                                    Linkedin 🔗💼
+                                </a>
+                            </li>
+                            <li>
+                                <span>mathesteix@gmail.com</span>
+                                <a href="mailto:mathesteix@gmail.com">→🔗📧</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <p>Criador: <strong>Matheus Teixeira</strong></p>
+                <p>Site: <strong>ANIMERAY</strong></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../public/scripts/navigation.js"></script>
+    <script src="../public/scripts/auth.js"></script>
+    <script src="../public/scripts/api.js"></script>
+    <script src="../public/scripts/dynamicComponents.js"></script>
+    <script src="profileDetails.js"></script>
+
+    <script>
+        // const token = sessionStorage.getItem('token');
+        // const payload = decodeToken(token);
+
+        // isAdm = payload.role === 'ADMIN';
+
+
+        document.getElementById('username').textContent = payload.username;
+        document.getElementById('email').textContent = payload.email;
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('token')) {
+                window.location.href = '../login/login.html';
+
+            } else {
+                setupAdminInterface();
+                //listNewAnimes();
+                setupNavigation();
+                setupPopUpMenu();
+            }
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../public/styles/all.css">
+  <link rel="stylesheet" href="../public/styles/footer.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+  <!-- Div do vídeo com o formulário de login -->
+  <video class="background-video" autoplay loop muted>
+    <source src="../public/videos/Background.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos HTML5.
+  </video>
+  <main>
+
+    <!-- Formulário de login -->
+    <div class="loginFormContainer">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="inputsContainer">
+          <label for="username">Nome de Usuário:</label>
+          <input type="text" id="username" placeholder="Usuário" required>
+        </div>
+        <div class="inputsContainer">
+          <label for="password">Senha:</label>
+          <input type="password" id="password" placeholder="Senha" required>
+        </div class="inputsContainer">
+        <button type="submit">Entrar</button>
+        
+        <a onclick="window.location.href='../registerUser/registerUser.html'">Não possui uma conta? Crie Uma</a>
+      </form>
+    </div>
+
+
+  </main>
+  <footer>
+    <div class="footer-container">
+        <div class="footer-sections">
+
+
+            
+            <div class="footer-section contact">
+                <div>
+                    <h3>Contate-me</h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/MatheusTeixeira1" target="_blank">
+                                Github 🔗😺
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/matheusteixeirap/" target="_blank">
+                                Linkedin 🔗💼
+                            </a>
+                        </li>
+                        <li>
+                            <span>mathesteix@gmail.com</span>
+                            <a href="mailto:mathesteix@gmail.com">→🔗📧</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>Criador: <strong>Matheus Teixeira</strong></p>
+            <p>Site: <strong>ANIMERAY</strong></p>
+        </div>
+    </div>
+</footer>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('http://localhost:8080/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: username, password: password })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          sessionStorage.setItem('token', data.token); // Salva o token de autenticação 
+          window.location.href = '../products/products.html'; // Navega para a próxima tela
+        } else {
+          alert('Erro ao fazer login');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    });
+
+  </script>
+</body>
+
+</html>

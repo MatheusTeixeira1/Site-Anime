@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="../public/styles/all.css">
+    <link rel="stylesheet" href="../public/styles/footer.css">
+    <link rel="stylesheet" href="registerUser.css">
+</head>
+
+<body>
+
+    <!-- Div do vídeo com o formulário de register -->
+    <video class="background-video" autoplay loop muted>
+        <source src="../public/videos/Background.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+    <main>
+
+        <!-- Formulário de register -->
+        <div class="registerFormContainer">
+            <h2>Registar</h2>
+            <form id="registerForm">
+                <label for="inputImage" class="labelinputImage">
+                    <span class="spanInputImage"></span>
+                    <input id="inputImage" class="inputImage" type="file" accept="image/*">
+                </label>
+                <div class="inputsContainer">
+                    <label for="username">Nome de Usuário:</label>
+                    <input type="text" id="username" placeholder="Usuário" required>
+                </div>
+                <div class="inputsContainer">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="seuemail@email.com" required>
+                </div>
+                <div class="inputsContainer">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" placeholder="Senha" required>
+                </div>
+                <div class="inputsContainer">
+                    <label for="passwordConfirm">Confirme Senha:</label>
+                    <input type="password" id="passwordConfirm" placeholder="Senha">
+                </div>
+                <button type="submit">Registar</button>
+            </form>
+            <a onclick="window.location.href='../login/login.html'">Não possui uma conta? Crie Uma</a>
+
+        </div>
+
+        <div id="error" style="color: red;"></div>
+
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-sections">
+
+
+
+                <div class="footer-section contact">
+                    <div>
+                        <h3>Contate-me</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/MatheusTeixeira1" target="_blank">
+                                    Github 🔗😺
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/matheusteixeirap/" target="_blank">
+                                    Linkedin 🔗💼
+                                </a>
+                            </li>
+                            <li>
+                                <span>mathesteix@gmail.com</span>
+                                <a href="mailto:mathesteix@gmail.com">→🔗📧</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <p>Criador: <strong>Matheus Teixeira</strong></p>
+                <p>Site: <strong>ANIMERAY</strong></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('image', document.getElementById('inputImage').files[0]);
+
+            const data = JSON.stringify({
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                role: "USER",
+            });
+            formData.append('data', data);
+
+            try {
+                const response = await fetch('http://localhost:8080/auth/register', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Usuário registrado com sucesso!');
+
+                    const data = await response.json();
+                    sessionStorage.setItem('token', data.token); // Salva o token de autenticação
+                    window.location.href = '../products/products.html';
+
+                    //window.location.href = 'login.html'; // Redireciona para a página de login
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById('error').textContent = errorData.message || 'Erro ao registrar usuário.';
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('error').textContent = 'Erro ao se conectar ao servidor.';
+            }
+        });
+
+
+
+
+        const inputFile = document.getElementById('inputImage');
+        const pictureImage = document.querySelector('.spanInputImage');
+        const pictureImageTxt = 'Foto de Perfil';
+        pictureImage.innerHTML = pictureImageTxt;
+
+        inputFile.addEventListener('change', function (e) {
+            const inputTarget = e.target;
+            const file = inputTarget.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function (e) {
+                    const readerTarget = e.target;
+
+                    const img = document.createElement('img');
+                    img.src = readerTarget.result;
+                    img.classList.add('chosenImage')
+                    pictureImage.innerHTML = '';
+                    pictureImage.appendChild(img);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                pictureImage.innerHTML = pictureImageTxt;
+            }
+        });
+    </script>
+</body>
+
+</html>

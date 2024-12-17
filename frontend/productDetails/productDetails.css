@@ -1,0 +1,40 @@
+.detailsImgContainer img{
+    width: 26vw;
+    height: 38vw;
+    object-fit: cover;
+}
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+}
+
+.detailsInfoContainer{
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detailsInfoContainer h2{
+    font-size: 32px;
+
+}
+.detailsInfoContainer h3{
+    margin-top: 32px;
+}
+.detailsInfoContainer p{
+    font-size: 20px;
+}
+.detailsBuyButtonContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.detailsBuyButtonContainer button{
+    width: 252px;
+    height: 48px;
+}
