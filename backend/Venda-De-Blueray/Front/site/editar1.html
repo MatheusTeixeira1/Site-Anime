@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .product-details {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-details img {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+        .product-details h2 {
+            margin-bottom: 10px;
+        }
+        .product-details p {
+            margin-bottom: 20px;
+        }
+        .product-details .price {
+            font-size: 1.5em;
+            color: #ff5722;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-details" id="product-details">
+        <!-- Os detalhes do produto serão exibidos aqui -->
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const pairs = queryString.split('&');
+            pairs.forEach(pair => {
+                const [key, value] = pair.split('=');
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Recupera os parâmetros da URL
+        const params = getQueryParams();
+        const productDetails = document.getElementById('product-details');
+
+        // Exibe os detalhes do produto na página
+        productDetails.innerHTML = `
+            <img src="${params.imagem}" alt="${params.nome}">
+            <input type="text" id="nome" value="${params.nome}"></input>
+            <input type="text" id="descricao" value="${params.descricao}"></input>
+            <input type="text" id="preco" value="${params.preco}"></input>
+        `;
+    </script>
+</body>
+</html>

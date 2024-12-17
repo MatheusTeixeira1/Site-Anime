@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="CSS/All.css">
+  <link rel="stylesheet" href="CSS/login.css">
+</head>
+<body>
+
+  <!-- Div do vídeo com o formulário de login -->
+  <div class="video-container">
+    <video autoplay muted loop class="video-bg">
+      <source src="Background.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos em HTML5.
+    </video>
+
+    <!-- Formulário de login -->
+    <div class="login-container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+
+        <a onclick="window.location.href='cadastro.html'">Não possui uma conta? Crie Uma</a>
+      </form>
+      
+    </div>
+
+    <!-- Links centralizados na parte inferior -->
+    <div class="footer-links">
+      <a href="#termos">Termos de Uso</a>
+      <a href="#privacidade">Política de Privacidade</a>
+      <a href="#desenvolvedores">Desenvolvedores</a>
+    </div>
+  </div>
+  <script>
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('http://localhost:8080/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username:username, password:password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                sessionStorage.setItem('token', data.token); // Salva o token de autenticação
+                window.location.href = 'Produtos.html'; // Navega para a próxima tela
+            } else {
+                alert('Erro ao fazer login');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    });
+
+  </script>
+</body>
+</html>

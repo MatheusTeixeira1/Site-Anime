@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            height: 100%;
+        }
+
+        body {
+            background-image: url('perfil.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            width: 95%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        .confirm-btn {
+            background-color: #ff5722;
+            color: white;
+            font-weight: bold;
+        }
+
+        .confirm-btn:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .confirm-btn:active {
+            transform: scale(0.95);
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .delete-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Perfil</h2>
+        <form id="edit-profile-form">
+            <input type="text" id="username" placeholder="Novo Nome" required>
+            <input type="email" id="email" placeholder="Email" style="display: none;">
+            <input type="password" id="password" placeholder="Senha" style="display: none;">
+            <input type="text" id="image" placeholder="URL da Imagem" style="display: none;">
+            <select id="role" style="display: none;">
+                <option value="USER">Usuário</option>
+                <option value="ADMIN">Administrador</option>
+            </select>
+            <button type="submit" class="confirm-btn">Confirmar</button>
+            <button type="button" class="delete-btn">Excluir Conta</button>
+        </form>
+    </div>
+    <script>
+        function decodeToken(token) {
+            const payloadBase64 = token.split('.')[1];
+            const payloadDecoded = atob(payloadBase64);
+            return JSON.parse(payloadDecoded);
+        }
+
+        // Redireciona para login se não estiver autenticado
+        if (!sessionStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        } else {
+            const token = sessionStorage.getItem('token');
+            const payload = decodeToken(token);
+
+            fetch(`http://localhost:8080/user/${payload.id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na rede ao tentar acessar o endpoint');
+                    }
+                    return response.json();
+                })
+                .then(usuarioAtual => {
+                    document.getElementById('username').value = usuarioAtual.username;
+                    document.getElementById('email').value = usuarioAtual.email;
+                    document.getElementById('password').value = usuarioAtual.password;
+                    document.getElementById('image').value = usuarioAtual.image;
+                    document.getElementById('role').value = usuarioAtual.role;
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar usuário:', error);
+                });
+            }
+
+        document.getElementById('edit-profile-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const newUsername = document.getElementById('username').value;
+            const newEmail = document.getElementById('email').value;
+            const newPassword = document.getElementById('password').value;
+            const newImage = document.getElementById('image').value;
+            const newRole = document.getElementById('role').value;
+
+            const token = sessionStorage.getItem('token');
+            const payload = decodeToken(token);
+
+            const usuarioNovo = {
+                id: payload.id,
+                username: newUsername,
+                email: newEmail,
+                password: newPassword,
+                image: newImage,
+                role: newRole
+            };
+
+            try {
+                const response = await fetch(`http://localhost:8080/user/${payload.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(usuarioNovo)
+                });
+
+                if (!response.ok) throw new Error(`Erro: ${response.status}`);
+                else{
+                    
+                    
+                };
+
+                alert("NOME ALTERADO");
+                window.location.href = 'login.html';
+            } catch (error) {
+                console.error('Erro ao atualizar usuário:', error);
+            }
+        });
+
+        document.querySelector('.delete-btn').addEventListener('click', function() {
+            const token = sessionStorage.getItem('token');
+            const payload = decodeToken(token);
+            
+            fetch(`http://localhost:8080/user/${payload.id}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(`Erro: ${response.status}`);
+                sessionStorage.removeItem('token');
+                window.location.href = 'login.html';
+                alert("CONTA DELETADA")
+            })
+            .catch(error => {
+                console.error('Erro ao excluir usuário:', error);
+            });
+            
+        });
+    </script>
+</body>
+</html>

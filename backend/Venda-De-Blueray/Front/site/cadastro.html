@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Novo Usuário</title>
+  <link rel="stylesheet" href="CSS/All.css">
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      /* Remove a rolagem horizontal */
+    }
+
+    /* Estilo da div do vídeo */
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 620px;
+      overflow: hidden;
+      /* Garante que o conteúdo não transborde da div */
+    }
+
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Estilo para o formulário de cadastro */
+    .register-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(49, 48, 48, 0.2);
+      /* Transparência */
+      padding: 5px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      text-align: center;
+      color: white;
+      max-width: 100%;
+      /* Garante que o formulário não ultrapasse a largura da tela */
+    }
+
+    .register-container input {
+      width: 30%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .register-container button {
+      width: 40%;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 20px 0;
+      border: none;
+      animation: colorChange 10s infinite;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Estilo do link "Voltar ao Login" */
+    .register-container a {
+      display: block;
+      margin-top: 10px;
+      color: #ff6700;
+      /* Cor laranja para o link */
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      /* Muda o ponteiro ao passar sobre o link */
+    }
+
+    .register-container a:hover {
+      color: #ff007b;
+      /* Cor laranja mais clara quando o link é hover */
+    }
+
+    /* Links de rodapé dentro da div do vídeo */
+    .footer-links {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      /* Distância entre os links */
+      color: #fff;
+      max-width: 100%;
+      /* Evita que os links transbordem */
+    }
+
+    .footer-links a {
+      color: #ff6700;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #ff007b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Div do vídeo com o formulário de cadastro -->
+  <video autoplay muted loop class="video-bg">
+    <source src="Background2.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos em HTML5.
+  </video>
+
+
+  <!-- Formulário de cadastro centralizado -->
+  <div class="register-container">
+    <h2>Criar conta</h2>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Usuário" required />
+      <input type="email" id="email" placeholder="E-mail" required /> <br>
+      <input type="password" id="password" placeholder="Senha" required />
+      <input type="password" id="password" placeholder="Confirmar Senha" />
+      <input type="file" id="image" accept="image/*" /><br>
+      <button type="submit">Registrar</button>
+
+    </form>
+    <a href="login.html">Já tem uma conta? Faça login</a>
+  </div>
+
+  </div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('image', document.getElementById('image').files[0]);
+
+      const data = JSON.stringify({
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        role: "USER",
+      });
+      formData.append('data', data);
+
+      try {
+        const response = await fetch('http://localhost:8080/auth/register', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          alert('Usuário registrado com sucesso!');
+
+          const data = await response.json();
+          sessionStorage.setItem('token', data.token); // Salva o token de autenticação
+          window.location.href = 'Produtos.html';
+
+          //window.location.href = 'login.html'; // Redireciona para a página de login
+        } else {
+          const errorData = await response.json();
+          document.getElementById('error').textContent = errorData.message || 'Erro ao registrar usuário.';
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        document.getElementById('error').textContent = 'Erro ao se conectar ao servidor.';
+      }
+    });
+
+  </script>
+</body>
+
+</html>

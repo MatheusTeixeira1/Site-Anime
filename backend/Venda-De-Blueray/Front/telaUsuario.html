@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Bem-vindo!</h1>
+    <button id="logoutButton">Sair</button>
+    <script>
+        // Redireciona para login se não estiver autenticado
+        if (!sessionStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            sessionStorage.removeItem('token'); // Remove o token
+            window.location.href = 'login.html'; // Volta para login
+        });
+    </script>
+</body>
+</html>

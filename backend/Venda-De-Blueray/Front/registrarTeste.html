@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar</title>
+</head>
+<body>
+    <div class="register-form">
+        <h2>Registrar Usuário</h2>
+        <form id="registerForm" enctype="multipart/form-data">
+            <input type="text" id="username" placeholder="Usuário" required />
+            <input type="email" id="email" placeholder="E-mail" required />
+            <input type="password" id="password" placeholder="Senha" required />
+            <select id="role" required>
+                <option value="">Selecione o papel</option>
+                <option value="ADMIN">Admin</option>
+                <option value="USER">User</option>
+            </select>
+            <input type="file" id="image" accept="image/*" />
+            <button type="submit">Registrar</button>
+        </form>
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', document.getElementById('image').files[0]);
+
+    const data = JSON.stringify({
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        role: document.getElementById('role').value,
+    });
+    formData.append('data', data);
+
+    try {
+        const response = await fetch('http://localhost:8080/auth/register', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            alert('Usuário registrado com sucesso!');
+            
+            const data = await response.json();
+            sessionStorage.setItem('token', data.token); // Salva o token de autenticação
+            window.location.href = 'dashboard.html';
+
+            //window.location.href = 'login.html'; // Redireciona para a página de login
+        } else {
+            const errorData = await response.json();
+            document.getElementById('error').textContent = errorData.message || 'Erro ao registrar usuário.';
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        document.getElementById('error').textContent = 'Erro ao se conectar ao servidor.';
+    }
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta</title>
+</head>
+<body>
+    
+    <form id="contaForm">
+        <h3>Criação de Conta</h3>
+        <label for="Nome">Nome de Usuario:</label>
+        <input type="text" id="Nome" name="Nome" required>
+        <label for="Email">Email:</label>
+        <input type="text" id="Email" name="Email" required>
+        <label for="Senha">Senha:</label>
+        <input type="password" id="Senha" name="Senha" required>
+        <label for="Senha2">Senha:</label>
+        <input type="password" id="Senha2" name="Senha2" required>
+        <button type="submit">Criar Conta</button>
+    </form>
+
+    
+    <script>
+        const apiUrl = 'http://localhost:8080/conta';
+
+        document.getElementById('contaForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const nome = document.getElementById('Nome').value;
+            const email = document.getElementById('Email').value;
+            const senha = document.getElementById('Senha').value;
+            const senha2 = document.getElementById('Senha2').value;
+            const conta = {nome: nome, email: email, senha: senha };
+
+            try {
+                if(senha2 != senha){
+                    throw new Error("Senhas não correspondem");
+                }
+                let response;
+                response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(conta)
+                    });
+
+                if (!response.ok){
+                    throw new Error(`Erro: ${response.status}`);
+                }else {
+                    const data = await response.json();
+                    sessionStorage.setItem('token', data.token); // Salva o token de autenticação
+                    window.location.href = 'dashboard.html'; // Navega para a próxima tela
+                }    
+                document.getElementById('contaForm').reset();
+            } catch (error) {
+                console.error('Erro ao criar conta:', error);
+            }
+        });
+
+    </script>
+</body>
+</html>

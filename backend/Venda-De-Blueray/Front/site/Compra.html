@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compra do Produto</title>
+  <link rel="stylesheet" href="Compra.css">
+  <style>
+    .qrcode-container {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .qrcode-container img {
+      max-width: 200px;
+      height: auto;
+      margin: 10px 0;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .qrcode-container p {
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Seção do produto -->
+    <div class="product-section">
+      <img id="product-image" src="" alt="Imagem do Produto">
+      <div id="product-title" class="product-title"></div>
+      <div id="product-description" class="product-description"></div>
+      <div id="product-price" class="product-price"></div>
+    </div>
+
+    <!-- Seção do formulário de pagamento -->
+    <div class="form-section">
+      <h2>Pagamento</h2>
+      <form id="paymentForm">
+        <div class="form-group">
+          <label for="cardBrand">Bandeira do Cartão</label>
+          <select id="cardBrand" required>
+            <option value="">Selecione</option>
+            <option value="Visa">Visa</option>
+            <option value="Mastercard">Mastercard</option>
+            <option value="American Express">American Express</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cardNumber">Número do Cartão</label>
+          <input type="text" id="cardNumber" required placeholder="Digite o número do cartão">
+        </div>
+
+        <div class="form-group">
+          <label for="expirationDate">Data de Expiração</label>
+          <input type="month" id="expirationDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="securityCode">Código de Segurança</label>
+          <input type="text" id="securityCode" required placeholder="CVV">
+        </div>
+
+        <div class="form-group payment-option">
+          <input type="radio" name="paymentMethod" id="cardPayment" value="Card" checked>
+          <label for="cardPayment">Pagar com Cartão</label>
+        </div>
+
+        <div class="form-group payment-option">
+          <input type="radio" name="paymentMethod" id="pixPayment" value="Pix">
+          <label for="pixPayment">Pagar com Pix</label>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Finalizar Compra</button>
+        </div>
+      </form>
+
+      <div class="qrcode-container" id="qrcodeContainer">
+        <img id="qrcodeImage" src="qr-code.png" alt="QR Code do Pix">
+        <p>Escaneie o QR Code para realizar o pagamento via Pix</p>
+      </div>
+
+      <div class="success-message" id="successMessage">
+        Compra realizada com sucesso! O valor total é <span id="successPrice"></span>.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dados simulados do produto (em um sistema real, isso viria de um backend ou banco de dados)
+    const produto = {
+      titulo: "Overlord",
+      descricao: "Overlord é um anime isekai de fantasia sombria, onde a história segue Momonga, um jogador que decide...",
+      preco: "R$ 49,90",
+      imagem: "IMG/overlord.jpeg"
+    };
+
+    // Preenchendo os dados do produto na página
+    document.getElementById("product-title").innerText = produto.titulo;
+    document.getElementById("product-description").innerText = produto.descricao;
+    document.getElementById("product-price").innerText = produto.preco;
+    document.getElementById("product-image").src = produto.imagem;
+
+    // Referências aos elementos de pagamento e QR Code
+    const cardPayment = document.getElementById('cardPayment');
+    const pixPayment = document.getElementById('pixPayment');
+    const qrcodeContainer = document.getElementById('qrcodeContainer');
+    const paymentForm = document.getElementById('paymentForm');
+    const successMessage = document.getElementById('successMessage');
+    const successPrice = document.getElementById('successPrice');
+
+    // Alterna entre pagamento por cartão e Pix
+    cardPayment.addEventListener('change', function () {
+      if (this.checked) {
+        qrcodeContainer.style.display = 'none'; // Esconde QR Code
+      }
+    });
+
+    pixPayment.addEventListener('change', function () {
+      if (this.checked) {
+        qrcodeContainer.style.display = 'block'; // Mostra QR Code
+      }
+    });
+
+    // Mostrando o preço na mensagem de sucesso
+    paymentForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita o envio do formulário
+      successPrice.innerText = produto.preco;
+      successMessage.style.display = 'block'; // Exibe a mensagem de sucesso
+    });
+  </script>
+
+</body>
+</html>

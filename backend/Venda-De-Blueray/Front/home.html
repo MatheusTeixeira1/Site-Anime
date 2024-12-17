@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Pessoas</title>
+    <style>
+        #person-list {
+            margin-top: 20px;
+        }
+        #person-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestão de Pessoas</h1>
+
+    <!-- Formulário para Incluir e Atualizar 
+     
+    
+    <form id="personForm">
+        <h3>Inserir e Atualizar Pessoa</h3>
+        <label for="id">ID (para atualizar):</label>
+        <input type="number" id="id" name="id">
+        <br><br>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+    -->
+    <form id="patriForm">
+        <h3>Inserir e Atualizar Pessoa</h3>
+        <label for="Id">ID:</label>
+        <input type="number" id="Id" name="Id">
+        <br><br>
+        <label for="Nome">Nome:</label>
+        <input type="text" id="Nome" name="Nome" required>
+        <br><br>
+        <label for="Departamento">Departamento:</label>
+        <input type="text" id="Departamento" name="Departamento" required>
+        <br><br>
+        <label for="Cpf">Cpf:</label>
+        <input type="text" id="Cpf" name="Cpf" required>
+        <br><br>
+        
+        
+
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h3>Lista de Pessoas</h3>
+    <ul id="patri-list"></ul>
+
+    <script>
+        const apiUrl = 'http://localhost:8080/colaborador';
+
+        // Função para listar pessoas
+        // async: Define uma função assíncrona que sempre retorna uma Promise
+        async function listarPessoas() {
+            try {
+                // await: Pausa a execução da função até que a promise (Um objeto que representa a eventual conclusão ou falha de uma operação assíncrona) 
+                //        seja resolvida ou rejeitada,
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`Erro: ${response.status}`);
+                // await: Pausa a execução da função até que a promise seja resolvida ou rejeitada,
+                const colaboradores = await response.json();
+
+                const colaboradosList = document.getElementById('patri-list');
+                colaboradosList.innerHTML = '';
+                
+                colaboradores.forEach(colaborador => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${colaborador.id} - ${colaborador.nome} - ${colaborador.departamento} - ${colaborador.cpf}`;
+                    
+                    // Botão de excluir para cada pessoa
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Excluir';
+                    deleteButton.onclick = () => excluirPessoa(colaborador.id);
+                    listItem.appendChild(deleteButton);
+
+                    // Botão de editar para cada pessoa
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Editar';
+                    editButton.onclick = () => editarPessoa(colaborador);
+                    listItem.appendChild(editButton);
+
+                    colaboradosList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Erro ao listar pessoas:', error);
+            }
+        }
+
+        // Chama a função para listar pessoas ao carregar a página
+        window.onload = listarPessoas;
+    </script>
+</body>
+</html>

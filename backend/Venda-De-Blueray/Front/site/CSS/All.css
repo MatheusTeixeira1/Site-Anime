@@ -1,0 +1,6 @@
+@keyframes colorChange {
+    0% { background-color: #ff007b; } /* Rosa */
+    33% { background-color: #ff6700; } /* Laranja */
+    66% { background-color: #28a745; } /* Verde */
+    100% { background-color: #ff007b; } /* Volta ao rosa */
+  }

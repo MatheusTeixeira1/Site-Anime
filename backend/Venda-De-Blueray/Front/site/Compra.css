@@ -1,0 +1,247 @@
+/* Container principal */
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo esteja acima do vídeo */
+}
+
+/* Seção do produto à esquerda */
+.product-section {
+  width: 45%;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.product-section img,
+.product-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6700;
+  margin-bottom: 10px;
+  transition: opacity 0.3s ease; /* Transição para opacidade */
+  text-decoration: none; /* Remove a sublinhado do link, caso esteja dentro de um <a> */
+}
+
+a {
+  text-decoration: none; /* Remove sublinhado de todos os links */
+  outline: none; /* Remove o contorno azul ao focar no link */
+}
+
+a:focus {
+  outline: none; /* Remove contorno azul ao focar no link */
+}
+
+.product-description,
+.product-price,
+.product-rating {
+  transition: opacity 0.3s ease; /* Transição para opacidade */
+}
+
+/* Descrição do produto */
+.product-description {
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+/* Valor do produto */
+.product-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6700;
+  margin-top: 10px;
+}
+
+/* Avaliação do produto */
+.product-rating {
+  color: #ffc107;
+  margin-top: 5px;
+}
+
+.star {
+  font-size: 18px;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.star.unfilled {
+  color: #ddd;
+}
+
+/* Seção do formulário à direita */
+.form-section {
+  width: 45%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos campos de pagamento */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Opção de pagamento via Pix */
+.form-group input[type="radio"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.payment-option {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* Botão Finalizar */
+.form-group button {
+  width: 100%;
+  padding: 15px;
+  background-color: #ff6700;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group button:hover {
+  background-color: #ff4500;
+}
+
+/* Mensagem de sucesso */
+.success-message {
+  display: none;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+/* Vídeo de fundo */
+.video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+/* Título da página */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: colorChange 5s infinite; /* Animação com duração de 5 segundos */
+}
+
+/* Grade de produtos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Cada produto */
+.product-item {
+  background-color: rgba(0, 0, 0, 0.95); /* Fundo semi-transparente */
+  position: relative;
+  padding: 15px;
+  min-height: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efeito de hover */
+.product-item:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* Texto "Comprar" escondido */
+.product-item::before {
+  content: 'Comprar';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostrar o texto "Comprar" ao passar o mouse */
+.product-item:hover::before {
+  opacity: 1;
+}
+
+/* Obscurecer a imagem ao passar o mouse */
+.product-item:hover img {
+  opacity: 0.2;
+}
+
+/* Efeito de hover em todas as informações */
+.product-item:hover .product-title,
+.product-item:hover .product-description,
+.product-item:hover .product-price,
+.product-item:hover .product-rating {
+  opacity: 0.2; /* Reduzir opacidade ao passar o mouse */
+}
+
+/* Categoria */
+.product-category {
+  background-color: #007bff;
+  color: white;
+  padding: 3px 6px;
+  font-size: 12px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo da categoria esteja acima de qualquer outro elemento */
+}
+

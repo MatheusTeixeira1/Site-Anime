@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Animes e Mangás</title>
+    <style>
+        /* Estilo básico */
+        *{
+            box-sizing: border-box; 
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        /* Vídeo de fundo */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Cabeçalho do perfil */
+        .header {
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            
+            display: flex;
+            justify-content: flex-end; /* Alinha os botões à direita */
+            align-items: center;
+            gap: 10px; /* Espaço entre os botões */
+            z-index: 1;
+        }
+
+        .header button {
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #ff5722;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 80px; /* Garante uma largura mínima */
+        }
+
+        .header button:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .header button:active {
+            transform: scale(0.95);
+        }
+
+        /* Contêiner de cartões */
+        .card-container {
+            margin-top: 100px; /* Espaço para o cabeçalho */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Organiza os cartões automaticamente */
+            gap: 20px; /* Espaço entre os cartões */
+            padding: 20px;
+        }
+
+        /* Estilo de cada cartão */
+        .card {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            margin: 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            margin: 10px;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .card .price {
+            margin: 10px;
+            font-size: 1.1em;
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+
+        .plus-container {
+            width: 100px;
+            height: 100px;
+            background-color: #ff5722; /* Cor de fundo laranja */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%; /* Torna a div circular */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para efeito de elevação */
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        /* Efeito ao passar o mouse */
+       
+
+        /* Estilo do SVG */
+        svg {
+            width: 40px;
+            height: 40px;
+            fill: white; /* Cor do símbolo */
+        }
+    </style>
+</head>
+<body>
+    <!-- Vídeo de fundo -->
+    <video class="background-video" autoplay loop muted>
+        <source src="background.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+
+    <!-- Cabeçalho do perfil -->
+    <div class="header">
+        <button id="perfilButton">Perfil</button>
+        <button id="logoutButton">Sair</button>
+    </div>
+
+    <!-- Contêiner para os cartões -->
+    <div class="card-container" id="card-container" >
+
+        <div id="adminButton" style="display: none; align-items: center; justify-content: center;" class="card" >
+            <div class="plus-container" >
+                <!-- SVG do símbolo de "+" -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                </svg>
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+
+<script>
+    const apiUrl = 'http://localhost:8080/blueray';
+
+    async function listarAnimes() {
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`Erro: ${response.status}`);
+            const animes = await response.json();
+
+            
+
+
+
+            const container = document.getElementById("card-container");
+
+            animes.forEach(anime => {
+                const card = document.createElement("div");
+                card.className = "card";
+
+                console.log("http://localhost:8080"+anime.imagem)
+                card.innerHTML = `
+                
+                    <img src="${anime.imagem}" alt="${anime.nome}">
+                    <h2>${anime.nome}</h2>
+                    <p>${anime.descricao}</p>
+                    <div class="price">${anime.preco}</div>
+                `;
+
+                card.addEventListener('click', () => { window.location.href = `editar.html?
+                    &idAnime=${encodeURIComponent(anime.id)}`; });
+
+                container.insertBefore(card, container.firstChild);
+            });
+        } catch (error) {
+            console.error('Erro ao listar pessoas:', error);
+        }
+    }
+
+    function decodeToken(token) {
+            const payloadBase64 = token.split('.')[1]; // Obtém a segunda parte do token (payload)
+            const payloadDecoded = atob(payloadBase64); // Decodifica de Base64 para string
+            return JSON.parse(payloadDecoded); // Converte a string JSON para objeto
+        };
+    if (!sessionStorage.getItem('token')) {
+        window.location.href = 'login.html';
+        
+    }else{
+        const token = sessionStorage.getItem('token');
+        const payload = decodeToken(token);
+
+        if (payload.role === 'ADMIN') { 
+            document.getElementById('adminButton').style.display = 'flex'; 
+        }
+        window.onload = listarAnimes;
+    }
+
+    document.getElementById('logoutButton').addEventListener('click', () => {
+            sessionStorage.removeItem('token'); // Remove o token
+            window.location.href = 'login.html'; // Volta para login
+        });
+    document.getElementById('perfilButton').addEventListener('click', () => {
+        window.location.href = 'perfil.html';
+    });
+
+    const adminButton = document.getElementById('adminButton');
+
+    // Adiciona o evento de clique
+    adminButton.addEventListener('click', () => {
+        // Substitua a URL abaixo pela página para onde você quer redirecionar
+        window.location.href = 'criarAnime.html';
+    });
+
+    const voltaButton = document.getElementById('btn-voltar');
+
+        // Adiciona o evento de clique
+        voltaButton.addEventListener('click', () => {
+            // Substitua a URL abaixo pela página para onde você quer redirecionar
+            window.location.href = 'Produtos.html';
+        });
+</script>
+</body>
+</html>

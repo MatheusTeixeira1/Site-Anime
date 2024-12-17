@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Bem-vindo! <span id="nome"></span></h1>
+    <button id="adminButton" style="display: none;">Admin Button</button>
+
+    <button id="logoutButton">Sair</button>
+    <script>
+        function decodeToken(token) {
+            const payloadBase64 = token.split('.')[1]; // Obtém a segunda parte do token (payload)
+            const payloadDecoded = atob(payloadBase64); // Decodifica de Base64 para string
+            return JSON.parse(payloadDecoded); // Converte a string JSON para objeto
+        }
+
+        // Redireciona para login se não estiver autenticado
+        if (!sessionStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }else{
+            const token = sessionStorage.getItem('token');
+
+            // Decodifica o token para obter o payload
+            const payload = decodeToken(token);
+
+            var nome = document.getElementById("nome");
+            nome.textContent =  payload.sub || payload.username || "Usuário";
+
+            if (payload.role === 'ADMIN') { 
+                document.getElementById('adminButton').style.display = 'block'; 
+            }
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            sessionStorage.removeItem('token'); // Remove o token
+            window.location.href = 'login.html'; // Volta para login
+        });
+    </script>
+</body>
+</html>
